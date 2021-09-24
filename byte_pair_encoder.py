@@ -1,13 +1,13 @@
 """
-Byte pair encoding tokenizer: 
+Byte pair encoding tokenizer:
 Instead of defining tokens as a string of characters with some
-delimiter, learn the tokens from a training corpus. 
+delimiter, learn the tokens from a training corpus.
 For k rounds:
 1. Scan corpus and select the most common adjacent symbols, c1 and c2.
 2. Merge c1 and c2 to form new symbol and add to vocabulary.
-3. Replace all co-occurances of c1 and c2 with the new symbol
+3. Replace all co-occurrences of c1 and c2 with the new symbol
 in the corpus.
-The algorithm continues to count and merge for k rounds, creating 
+The algorithm continues to count and merge for k rounds, creating
 longer symbols. The resulting vocabulary is the original characters
 plus k merged symbols. It can then be used to tokenize other strings.
 """
@@ -16,10 +16,10 @@ from collections import defaultdict
 
 def most_common_pair(corpus: list) -> tuple:
 	"""
-	Scans corpus for most common consecutive two symbols and 
+	Scans corpus for most common consecutive two symbols and
 	return them as a tuple
 	"""
-	pair_count = defaultdict(lambda: 0)	
+	pair_count = defaultdict(lambda: 0)
 	for pair in zip(corpus[0::], corpus[1::]):
 		pair_count[pair] += 1
 	max_pair = list(pair_count.keys())[0]
@@ -31,7 +31,7 @@ def most_common_pair(corpus: list) -> tuple:
 
 def replace_all(corpus: list, c1: str, c2: str):
 	"""
-	Scans corpus for co-occurances of c1 and c2 
+	Scans corpus for co-occurances of c1 and c2
 	and replaces them with the merged symbol c1 + c2.
 	"""
 	new_corpus = []
@@ -48,7 +48,7 @@ def replace_all(corpus: list, c1: str, c2: str):
 	if i < len(corpus):
 		new_corpus.append(corpus[i])
 	return new_corpus
-		
+
 
 def byte_pair_encoding(corpus: list, k: int) -> set:
 	"""
