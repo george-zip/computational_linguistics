@@ -73,6 +73,8 @@ class SingleCharacterSubstitution:
 		return ord(char) - 97
 
 	def sub_weight(self, x, y):
+		if x == y:
+			return 0
 		weight = int(self.weight_matrix[self.char_to_index(x)][self.char_to_index(y)])
 		if weight == 0:
 			return 1
@@ -96,9 +98,9 @@ def main():
 			default_weight, default_weight, sub.sub_weight
 		)
 		if is_cognate(str1, str2, distance):
-			print(f"{str1} and {str2} seem to be cognates. Calculated distance: {distance:.2f}")
+			print(f"{str1} and {str2} seem to be cognates.")
 		else:
-			print(f"{str1} and {str2} do NOT seem to be cognates. Calculated distance: {distance:.2f}")
+			print(f"{str1} and {str2} do NOT seem to be cognates.")
 
 
 if __name__ == '__main__':

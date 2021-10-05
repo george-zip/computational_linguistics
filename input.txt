@@ -9,7 +9,7 @@ eight	acht
 nine     neun
 ten	zehn
 mother  Mutter
-father    Vatter
+father    Vater
 sister	Schwester
 brother  Bruder
 Monday  Montag

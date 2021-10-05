@@ -18,15 +18,15 @@ algorithm.
 
 ### Confusion Matrix 
 
-The matrix is roughly based on the confusion matrix in Kemighan (1990) that focused on spelling correction. The 
-approach involves a few simplifications and workarounds, as follows:
+I based the matrix on the confusion matrix in Kemighan (1990) that focused on spelling correction. The 
+approach involves some major simplifications and workarounds, as follows:
 
    1. It assigns a weight to individual character pairs (for example t -> d) that are likely to be equivalent in 
-      the two languages. A better approach would be for the matrix to encode rules that convert characters as well as
-      consonant clusters, digraphs or perhaps subwords and morphemes. An example of this is the rule that converts an 
-      English 'th' to 'd'. We would need to modify the MED algorithm to be able to substitute, insert or delete two or 
-      more characters at a time. We would also need to adjust in some way for the weight or cost of a multi-character 
-      operation.
+      the two languages. A better approach would be for the matrix to encode rules that converts subwords or morphemes. 
+      Examples of this is are rules that converts an English 'th' to German 'd' and 'gh' to 'ch'. As this algorithm 
+      stands, it misses what look like valid cognates like 'six' and 'sechs.' Such as approach would need to modify 
+      the MED algorithm to be able to substitute, insert or delete two or more characters at a time. It 
+      would also have to adjust in some way for the weight or cost of a multi-character operation.
 
    2. We want to assign likely substitution pairs a lower weight, but the original spelling matrix used higher 
       weightings for pairs that were more likely to be confused. The original spelling algorithm (Kemighan, 1990) 
