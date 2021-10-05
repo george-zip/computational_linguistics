@@ -1,3 +1,10 @@
+"""
+This script calculates the Levenshtein distance between two strings, weighted by the probability that they are cognates.
+It judges whether the two strings are cognates based on a threshold and uses a confusion matrix to assign a weight to
+German and English character pairs. The input to the script is a list of English and German word pairs,
+separated by whitespace.
+"""
+
 from typing import Callable
 import sys
 import re
@@ -54,6 +61,11 @@ def default_weight(_x, _y):
 
 class SingleCharacterSubstitution:
 
+	"""
+	Encapsulates functionality for calculating the weight of substituting a single character based on
+	matrix weighting
+	"""
+
 	def __init__(self, weight_matrix):
 		self.weight_matrix = weight_matrix
 
@@ -73,6 +85,9 @@ class SingleCharacterSubstitution:
 		return ord(char) - 97
 
 	def sub_weight(self, x, y):
+		"""
+		Calculates substitution weight
+		"""
 		if x == y:
 			return 0
 		weight = int(self.weight_matrix[self.char_to_index(x)][self.char_to_index(y)])
@@ -82,13 +97,20 @@ class SingleCharacterSubstitution:
 			return 1 / weight
 
 
-def import_weights(matrix_file_path):
+def import_weights(matrix_file_path: str) -> list:
+	"""
+	Opens csv file containing confusion matrix of weightings and loads the contents into a list
+	"""
 	with open(matrix_file_path) as f:
 		reader = csv.reader(f)
 		return list(reader)
 
 
 def main():
+	"""
+	Reads in word pairs from stain, calculates distance and then decides whether the pair qualifies as cognate.
+	Results are printed to stdout.
+	"""
 	matrix_file_path = sys.argv[1] if len(sys.argv) > 2 else "./matrix.csv"
 	sub = SingleCharacterSubstitution(import_weights(matrix_file_path))
 	for line in sys.stdin:
