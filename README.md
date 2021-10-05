@@ -19,13 +19,14 @@ algorithm.
 ### Confusion Matrix 
 
 The matrix is roughly based on the confusion matrix in Kemighan (1990) that focused on spelling correction. The 
-approach involves a few and simplifications and workarounds, as follows:
+approach involves a few simplifications and workarounds, as follows:
 
-   1. It assigns a weight to individual character pairs (for example t -> d). I would like to extend the logic to 
-      handle German to English rules for converting consonant clusters, digraphs or perhaps subwords and morphemes.  
-      An example of this is the rule that converts an English 'th' to 'd'. We would need to modify the MED algorithm 
-      to be able to update / insert / delete two or more characters at a time. We would also need to adjust in some 
-      way for the weight or cost of a multi-character operation.
+   1. It assigns a weight to individual character pairs (for example t -> d) that are likely to be equivalent in 
+      the two languages. A better approach would be for the matrix to encode rules that convert characters as well as
+      consonant clusters, digraphs or perhaps subwords and morphemes. An example of this is the rule that converts an 
+      English 'th' to 'd'. We would need to modify the MED algorithm to be able to substitute, insert or delete two or 
+      more characters at a time. We would also need to adjust in some way for the weight or cost of a multi-character 
+      operation.
 
    2. We want to assign likely substitution pairs a lower weight, but the original spelling matrix used higher 
       weightings for pairs that were more likely to be confused. The original spelling algorithm (Kemighan, 1990) 
@@ -42,20 +43,20 @@ approach involves a few and simplifications and workarounds, as follows:
    3. Finally, given the limitations on time, I adapted the weights from an internet source (WikiLists, 2009). I 
       have no idea how accurate and complete these are. It’s also not clear if the weights I’ve assigned to the 
       rules are correct. Much more careful research and experimentation needs to be done here. For a start, we need 
-      a corpus of German to know the distribution of spelling combinations. Without knowing how often the English v 
-      is replaced by b in equivalent words, we are shooting in the dark.  
+      a corpus of German to know the distribution of spelling combinations. Without knowing how often the English `v` 
+      is replaced by `b` in equivalent words, we are shooting in the dark.  
 
 ### Threshold  
 
-The determination as to whether two strings are cognates is based on the ratio of the distance to the number of 
-characters in the strings. I don’t imagine this is the optimal formula, but I think we want it scaled to the size 
-of the strings in some way. In other words, if the distance between two 10-character and two 3-character strings is 
-the same, that implies to me that the 10-character strings have a closer relationship.
+The script determines whether two strings are cognates on the ratio of the distance to the number of  characters in the 
+strings. I don’t imagine this is the optimal formula, but I think it is in the right direction. We want it scaled to the 
+size of the strings in some way. In other words, if the distance between two 10-character and two 3-character strings 
+is the same, that implies to me that the 10-character strings have a closer relationship.
 
 ### Text Normalization
 
-The script normalizes by case folding. There’s obviously a lot more that can be done to handle contractions, 
-punctuation and so on. 
+The script normalizes by case folding. Even thought the sample input doesn't contain these, there’s obviously a lot more 
+that should be done to handle contractions, punctuation and so on. 
 
 There is also the problem of the different character sets in German and English. For now, I’ve worked around the 
 issue by associating non-ASCII characters with ASCII equivalents. This is unfortunately hardcoded for
