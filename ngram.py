@@ -34,9 +34,9 @@ for pair in bigram_counts:
 # P(Sam|am) is represented by the tuple ("am","Sam")
 target_bigram = ("am", "Sam")
 print(
-	f"The bigram probability for {target_bigram} bigram_" \
+	f"The bigram probability for P({target_bigram[1]}|{target_bigram[0]})" \
 	f" is {bigram_probabilities[target_bigram]:.3f}"
 )
 
 # Output:
-# The bigram probability for ('am', 'Sam') bigram_ is 0.667
+# The bigram probability for P(Sam|am) is 0.667
