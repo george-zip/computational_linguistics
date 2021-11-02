@@ -55,7 +55,7 @@ is the same, that implies to me that the 10-character strings have a closer rela
 
 ### Text Normalization
 
-The script normalizes by case folding. Even thought the sample input doesn't contain these, there’s obviously a lot more 
+The script normalizes by case folding. Even though the sample input doesn't contain these, there’s obviously a lot more 
 that should be done to handle contractions, punctuation and so on. 
 
 There is also the problem of the different character sets in German and English. For now, I’ve worked around the 
